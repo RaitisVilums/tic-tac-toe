@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <title>TicTacToe</title>
+  </head>
+  <body>
+    <!--! Header -->
+    <header class="header">
+      <h1>4x4 / 3x3 Tic Tac Toe</h1>
+    </header>
+
+    <!-- ! Main grid and the game -->
+    <main class="main">
+      <div class="main__turn">
+        <p data-id="turn">
+          <img src="./assets/cross-svgrepo-com.svg" alt="X" class="icon" />
+          Player 1 turn
+        </p>
+      </div>
+      <div class="main__actions" data-id="actions">
+        <p>Actions</p>
+        <img
+          src="./assets/arrow-down-338-svgrepo-com.svg"
+          alt="arrow down"
+          class="icon"
+        />
+        <div class="main__actions--item hidden" data-id="actions-items">
+          <p data-id="reset">Reset</p>
+          <p data-id="new-game">New game</p>
+          <p data-id="game-4x4">4 x 4</p>
+        </div>
+      </div>
+
+      <!--  ! The game -->
+      <div id="1" class="main__square" data-id="game-square"></div>
+      <div id="2" class="main__square" data-id="game-square"></div>
+      <div id="3" class="main__square" data-id="game-square"></div>
+      <div id="4" class="main__square" data-id="game-square"></div>
+      <div id="5" class="main__square" data-id="game-square"></div>
+      <div id="6" class="main__square" data-id="game-square"></div>
+      <div id="7" class="main__square" data-id="game-square"></div>
+      <div id="8" class="main__square" data-id="game-square"></div>
+      <div id="9" class="main__square" data-id="game-square"></div>
+
+      <div
+        class="main__score"
+        style="background: var(--accent-color-3); color: var(--primary-color)"
+      >
+        <p>Player 1</p>
+        <p>Wins : 0</p>
+      </div>
+      <div
+        class="main__score"
+        style="background: var(--accent-color-1); color: var(--primary-color)"
+      >
+        <p>Ties</p>
+        <p>0</p>
+      </div>
+      <div
+        class="main__score"
+        style="
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+        "
+      >
+        <p>Player 2</p>
+        <p>Wins : 0</p>
+      </div>
+    </main>
+    <!-- !creadentials -->
+    <footer class="footer__credentials">
+      <h2>Created by Raitis</h2>
+    </footer>
+    <!-- ! modal for the winner -->
+    <div class="modal__backdrop hidden"></div>
+    <div class="modal hidden">
+      <div class="modal__content">
+        <p>Player 1 wins!</p>
+        <button class="modal__content--button">Play again</button>
+      </div>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
