@@ -1,4 +1,5 @@
 import View from "./view.js";
+import Store from "./store.js";
 
 const App = {
   $: {
@@ -61,20 +62,6 @@ const App = {
   },
 
   events() {
-    // ! Destructuring the $ object from app for readability
-    const {
-      action,
-      actionItems,
-      resetBtn,
-      newGameBtn,
-      upgradeLayout,
-      gameLauks,
-      turn,
-      modalButton,
-      modal,
-      modalBackdrop,
-    } = App.$;
-
     action.addEventListener("click", (e) => {
       actionItems.classList.toggle("hidden");
     });
@@ -118,20 +105,6 @@ const App = {
         const currentPlayer =
           moves.length === 0 ? 1 : getOppositePlayer(lastMove.playerId);
 
-        const element =
-          currentPlayer === 1
-            ? `<img src="./assets/cross-svgrepo-com.svg" alt="X" class="icon-div" />`
-            : `<img src="./assets/circle-svgrepo-com.svg" alt="O" class="icon-div" />`;
-
-        e.target.innerHTML = element;
-
-        turn.innerHTML =
-          currentPlayer === 2
-            ? `<img src="./assets/cross-svgrepo-com.svg" alt="X" class="icon" />
-          Player 1 turn`
-            : `<img src="./assets/circle-svgrepo-com.svg" alt="O" class="icon" />
-          Player 2 turn`;
-
         moves.push({
           squareId: +lauks.id,
           playerId: currentPlayer,
@@ -156,8 +129,11 @@ const App = {
   },
 };
 
+const players = [{ id: 1 }, { id: 2 }];
+
 function init() {
   const view = new View();
+  const store = new Store(players);
 
   view.gameResetEvent((e) => {
     console.log(`reset the game`);
@@ -167,10 +143,18 @@ function init() {
     console.log(`reset the game`);
   });
 
-  view.playerMoveEvent((e) => {
-    console.log(`reset the game`);
-  });
+  view.playerMoveEvent((lauks) => {
+    const blocked = store.game.moves.find((move) => move.laukaId === +lauks.id);
 
-  console.log(view.$.turn);
+    if (blocked) {
+      return;
+    }
+
+    view.tooglePlayerMove(lauks, store.game.currPlayer);
+
+    store.playerMove(+lauks.id);
+
+    view.turnIndicator(store.game.currPlayer);
+  });
 }
 window.addEventListener("load", init);

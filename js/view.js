@@ -35,7 +35,7 @@ export default class View {
   }
   playerMoveEvent(handler) {
     this.$.gameLauks.forEach((lauks) => {
-      lauks.addEventListener("click", handler);
+      lauks.addEventListener("click", () => handler(lauks));
     });
   }
 
@@ -45,7 +45,23 @@ export default class View {
     this.$.actionItems.classList.toggle("hidden");
   }
 
-  #turnIndicator() {}
+  tooglePlayerMove(gameLauks, player) {
+    const element =
+      player.id === 1
+        ? `<img src="../assets/cross-svgrepo-com.svg" alt="X" class="icon-div" />`
+        : `<img src="../assets/circle-svgrepo-com.svg" alt="O" class="icon-div" />`;
+
+    gameLauks.innerHTML = element;
+  }
+
+  turnIndicator(player) {
+    this.$.turn.innerHTML =
+      player.id === 2
+        ? `<img src="../assets/cross-svgrepo-com.svg" alt="X" class="icon" />
+          Player 1 turn`
+        : `<img src="../assets/circle-svgrepo-com.svg" alt="O" class="icon" />
+          Player 2 turn`;
+  }
 
   #qs(selector, parent) {
     const el = parent
